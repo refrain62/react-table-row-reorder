@@ -44,3 +44,7 @@ td {
   border-collapse: collapse;
   padding: 1em;
 }
+
+.dragging {
+  background-color: #eee;
+}

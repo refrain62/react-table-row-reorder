@@ -24,7 +24,7 @@ const UserTable = () => {
   const dragEnter = (index) => {
     console.log('drag enter', index);
     console.log('dragIndex', dragIndex);
-    
+
     if (index === dragIndex) return;
     setUsers((prevState) => {
       let newUsers = JSON.parse(JSON.stringify(prevState));
@@ -34,6 +34,13 @@ const UserTable = () => {
     });
   
     setDragIndex(index);
+  }
+
+  const dragEnd = () => {
+    console.log('drop');
+
+    // 並び変え後のusers配列をサーバーに送信する処理を追加する（永続化）
+    setDragIndex(null);
   }
 
   return (
@@ -54,6 +61,9 @@ const UserTable = () => {
               draggable={true}
               onDragStart={() => dragStart(index)}
               onDragEnter={() => dragEnter(index)}
+              onDragOver={(event) => event.preventDefault()}
+              onDragEnd={dragEnd}
+              className="{index === dragIndex ? 'dragging' : ''}"
               >
               <td>{user.id}</td>
               <td>{user.name}</td>
