@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
+  const [dragIndex, setDragIndex] = useState(null);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -15,8 +16,9 @@ const UserTable = () => {
     getUsers(users);
   }, []);
 
-  const dragStart = () => {
-    console.log('drag start');
+  const dragStart = (index) => {
+    console.log('drag start', index);
+    setDragIndex(index);
   }
 
   return (
@@ -32,7 +34,7 @@ const UserTable = () => {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={user.id} draggable={true} onDragStart={() => dragStart()}>
+            <tr key={user.id} draggable={true} onDragStart={() => dragStart(index)}>
               <td>{user.id}</td>
               <td>{user.name}</td>
               <td>{user.username}</td>
