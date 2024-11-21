@@ -15,6 +15,10 @@ const UserTable = () => {
     getUsers(users);
   }, []);
 
+  const dragStart = () => {
+    console.log('drag start');
+  }
+
   return (
     <div style={{ margin: '2em' }}>
       <table>
@@ -28,7 +32,7 @@ const UserTable = () => {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={user.id}>
+            <tr key={user.id} draggable={true} onDragStart={() => dragStart()}>
               <td>{user.id}</td>
               <td>{user.name}</td>
               <td>{user.username}</td>
