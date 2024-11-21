@@ -21,6 +21,11 @@ const UserTable = () => {
     setDragIndex(index);
   }
 
+  const dragEnter = (index) => {
+    console.log('drag enter', index);
+    console.log('dragIndex', dragIndex);
+  }
+
   return (
     <div style={{ margin: '2em' }}>
       <table>
@@ -34,7 +39,12 @@ const UserTable = () => {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={user.id} draggable={true} onDragStart={() => dragStart(index)}>
+            <tr
+              key={user.id}
+              draggable={true}
+              onDragStart={() => dragStart(index)}
+              onDragEnter={() => dragEnter(index)}
+              >
               <td>{user.id}</td>
               <td>{user.name}</td>
               <td>{user.username}</td>
