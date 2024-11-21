@@ -24,6 +24,16 @@ const UserTable = () => {
   const dragEnter = (index) => {
     console.log('drag enter', index);
     console.log('dragIndex', dragIndex);
+    
+    if (index === dragIndex) return;
+    setUsers((prevState) => {
+      let newUsers = JSON.parse(JSON.stringify(prevState));
+      const deleteElement = newUsers.splice(dragIndex, 1)[0];
+      newUsers.splice(index, 0, deleteElement);
+      return newUsers;
+    });
+  
+    setDragIndex(index);
   }
 
   return (
